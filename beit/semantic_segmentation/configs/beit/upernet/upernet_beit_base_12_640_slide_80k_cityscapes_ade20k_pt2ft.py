@@ -81,4 +81,4 @@ runner = dict(type='IterBasedRunner', max_iters=80000)
 checkpoint_config = dict(by_epoch=False, interval=10000)
 evaluation = dict(interval=2000, metric='mIoU')
 
-load_from = 'checkpoints/beit_base_patch16_640_pt22k_ft22ktoade20k.pth'
+#load_from = 'checkpoints/beit_base_patch16_640_pt22k_ft22ktoade20k.pth'
