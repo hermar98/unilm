@@ -15,12 +15,12 @@ _base_ = [
     '../../_base_/models/upernet_beit.py', '../../_base_/datasets/cityscapes.py',
     '../../_base_/default_runtime.py', '../../_base_/schedules/schedule_160k.py'
 ]
-crop_size = (640, 640)
+crop_size = (512, 1024)
 
 model = dict(
     backbone=dict(
         type='BEiT',
-        img_size=640,
+        img_size=1024,
         patch_size=16,
         embed_dim=768,
         depth=12,
@@ -62,7 +62,7 @@ lr_config = dict(_delete_=True, policy='poly',
                  power=1.0, min_lr=0.0, by_epoch=False)
 
 # By default, models are trained on 8 GPUs with 2 images per GPU
-data=dict(samples_per_gpu=2)
+data=dict(samples_per_gpu=4)
 
 runner = dict(type='IterBasedRunnerAmp')
 
@@ -77,8 +77,8 @@ optimizer_config = dict(
     use_fp16=True,
 )
 
-runner = dict(type='IterBasedRunner', max_iters=10000)
+runner = dict(type='IterBasedRunner', max_iters=80000)
 checkpoint_config = dict(by_epoch=False, interval=10000)
 evaluation = dict(interval=2000, metric='mIoU')
 
-#load_from = 'checkpoints/beit_base_patch16_640_pt22k_ft22ktoade20k.pth'
+load_from = 'checkpoints/beit_base_patch16_640_pt22k_ft22ktoade20k.pth'
