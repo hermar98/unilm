@@ -15,12 +15,12 @@ _base_ = [
     '../../_base_/models/upernet_beit.py', '../../_base_/datasets/cityscapes.py',
     '../../_base_/default_runtime.py', '../../_base_/schedules/schedule_160k.py'
 ]
-crop_size = (512, 1024)
+crop_size = (768, 768)
 
 model = dict(
     backbone=dict(
         type='BEiT',
-        img_size=1024,
+        img_size=768,
         patch_size=16,
         embed_dim=768,
         depth=12,
@@ -42,7 +42,7 @@ model = dict(
         in_channels=768,
         num_classes=19
     ), 
-    test_cfg = dict(mode='whole')
+    test_cfg = dict(mode='slide', crop_size=crop_size, stride=(512, 512))
 )
 
 # AdamW optimizer, no weight decay for position embedding & layer norm in backbone
